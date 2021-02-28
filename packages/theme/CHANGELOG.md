@@ -1,5 +1,14 @@
 # Change Log
 
+## 1.6.3
+
+### Patch Changes
+
+- [`7efc9c217`](https://github.com/chakra-ui/chakra-ui/commit/7efc9c217789b2b314ed629c94b947256e8cbe2c)
+  [#3454](https://github.com/chakra-ui/chakra-ui/pull/3454) Thanks
+  [@tomdohnal](https://github.com/tomdohnal)! - fix full size modal with
+  y-overflowing content behaviour
+
 ## 1.6.2
 
 ### Patch Changes
