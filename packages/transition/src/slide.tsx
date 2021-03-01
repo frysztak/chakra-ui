@@ -1,5 +1,11 @@
 import { cx, __DEV__ } from "@chakra-ui/utils"
-import { AnimatePresence, HTMLMotionProps, motion } from "framer-motion"
+import {
+  AnimatePresence,
+  AnimationFeature,
+  HTMLMotionProps,
+  m as motion,
+  MotionConfig,
+} from "framer-motion"
 import * as React from "react"
 import { EASINGS, MotionVariants } from "./__utils"
 
@@ -105,23 +111,25 @@ export const Slide = React.forwardRef<HTMLDivElement, SlideProps>(
 
     return (
       <AnimatePresence custom={direction}>
-        {shouldExpand && (
-          <motion.div
-            ref={ref}
-            initial="exit"
-            className={cx("chakra-slide", className)}
-            animate={isOpen || unmountOnExit ? "enter" : "exit"}
-            exit="exit"
-            custom={direction}
-            variants={variants}
-            style={{
-              position: "fixed",
-              ...baseStyle,
-              ...style,
-            }}
-            {...rest}
-          />
-        )}
+        <MotionConfig features={[AnimationFeature]}>
+          {shouldExpand && (
+            <motion.div
+              ref={ref}
+              initial="exit"
+              className={cx("chakra-slide", className)}
+              animate={isOpen || unmountOnExit ? "enter" : "exit"}
+              exit="exit"
+              custom={direction}
+              variants={variants}
+              style={{
+                position: "fixed",
+                ...baseStyle,
+                ...style,
+              }}
+              {...rest}
+            />
+          )}
+        </MotionConfig>
       </AnimatePresence>
     )
   },

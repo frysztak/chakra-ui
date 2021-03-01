@@ -1,6 +1,12 @@
 import { useUpdateEffect } from "@chakra-ui/hooks"
 import { cx, warn, __DEV__ } from "@chakra-ui/utils"
-import { AnimatePresence, HTMLMotionProps, motion } from "framer-motion"
+import {
+  AnimatePresence,
+  AnimationFeature,
+  HTMLMotionProps,
+  m as motion,
+  MotionConfig,
+} from "framer-motion"
 import * as React from "react"
 import { EASINGS, MotionVariants } from "./__utils"
 
@@ -142,25 +148,29 @@ export const Collapse = React.forwardRef<HTMLDivElement, CollapseProps>(
     if (unmountOnExit) {
       return (
         <AnimatePresence initial={false} custom={custom}>
-          {isOpen && (
-            <motion.div
-              {...ownProps}
-              initial="exit"
-              animate="enter"
-              exit="exit"
-            />
-          )}
+          <MotionConfig features={[AnimationFeature]}>
+            {isOpen && (
+              <motion.div
+                {...ownProps}
+                initial="exit"
+                animate="enter"
+                exit="exit"
+              />
+            )}
+          </MotionConfig>
         </AnimatePresence>
       )
     }
 
     return (
-      <motion.div
-        {...ownProps}
-        style={{ ...ownProps.style, display }}
-        initial={false}
-        animate={open ? "enter" : "exit"}
-      />
+      <MotionConfig features={[AnimationFeature]}>
+        <motion.div
+          {...ownProps}
+          style={{ ...ownProps.style, display }}
+          initial={false}
+          animate={open ? "enter" : "exit"}
+        />
+      </MotionConfig>
     )
   },
 )
